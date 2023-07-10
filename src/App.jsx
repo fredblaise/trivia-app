@@ -10,7 +10,7 @@ function App() {
   const [allPossibleAnswers, setAllPossibleAnswers] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  //combines correct and incorrect answer into single array
+  // combines correct and incorrect answer into single array
   async function combineAllAnswers(incorrectAnswers, correctAnswer) {
     let allAnswers = [];
     incorrectAnswers.map((item) => {
@@ -19,7 +19,7 @@ function App() {
       });
     });
     allAnswers.push(correctAnswer);
-    //Randomize order of answers in array
+    // Randomize order of answers in array
     allAnswers.sort(() => Math.random() - 0.5);
     setAllPossibleAnswers(allAnswers);
   }
@@ -47,19 +47,20 @@ function App() {
   }, []);
 
   function verifyAnswer(selectedAnswer) {
-    //If the selected answer equals the correct answer, then we get the next trivia quesiton and increase the current points by 1
+    //If the selected answer equals the correct answer, increase the current points by 1
     if (selectedAnswer === correctAnswer) {
-      getTriviaData();
       setCurrentPoints(currentPoints + 1);
     } else {
-      //If the selected answer does not equal the correct answer, decreaes the current points by 1
+      //If the selected answer does not equal the correct answer, decrease the current points by 1
       setCurrentPoints(currentPoints - 1);
     }
+
+    getTriviaData();
   }
 
   //Converts html code to regular characters
   function removeCharacters(question) {
-    return question.replace(/(&quot\;)/g, "\"").replace(/(&rsquo\;)/g, "\"").replace(/(&#039\;)/g, "\'").replace(/(&amp\;)/g, "\"");
+    return question.replace(/(&quot\;)/g, "\"").replace(/(&rsquo\;)/g, "\"").replace(/(&#039\;)/g, "\'").replace(/(&amp\;)/g, "\"").replace(/(&ldquo\;)/g, "\"").replace(/(&rdquo\;)/g, "\"").replace(/(&eacute\;)/g, "é").replace(/(&shy\;)/g, "")
   }
 
   return (
