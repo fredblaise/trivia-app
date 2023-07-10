@@ -54,8 +54,10 @@ function App() {
       //If the selected answer does not equal the correct answer, decrease the current points by 1
       setCurrentPoints(currentPoints - 1);
     }
+    setTimeout(function(){
+      getTriviaData();
+  }, 3000);
 
-    getTriviaData();
   }
 
   //Converts html code to regular characters
